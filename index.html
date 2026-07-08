@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StadiumGPT 360 | FIFA World Cup 2026 AI Stadium OS</title>
+    <meta
+      name="description"
+      content="Demo-ready AI operating system for FIFA World Cup 2026 stadium operations, fan experience, security, accessibility, transportation, sustainability, and emergency response."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#overview" aria-label="StadiumGPT 360 overview">
+          <span class="brand-mark">360</span>
+          <span>
+            <strong>StadiumGPT</strong>
+            <small>FIFA World Cup 2026</small>
+          </span>
+        </a>
+        <nav class="nav-list" id="navList"></nav>
+        <div class="settings-card" style="border: 1px solid var(--line); background: var(--panel); padding: 12px; border-radius: var(--radius); display: flex; flex-direction: column; gap: 6px;">
+          <span class="eyebrow" style="font-size:0.65rem; color:var(--accent);">Gemini AI Settings</span>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <input id="geminiKey" type="password" placeholder="Enter Gemini API Key" aria-label="Gemini API Key" style="height:32px; font-size:0.75rem; width:100%; padding:0 8px; border-radius:var(--radius); border:1px solid var(--line); background:var(--panel-solid); color:var(--text);" />
+            <small style="font-size:0.65rem; color:var(--muted); line-height:1.2;">Saved locally. Enables real AI chat & SQL generation.</small>
+          </div>
+        </div>
+        <div class="operator-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Command AI Live</strong>
+            <small>12 agents synchronized</small>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <button class="icon-btn" id="menuButton" aria-label="Toggle navigation">Menu</button>
+          <label class="search">
+            <span>Ask</span>
+            <input id="smartSearch" type="search" placeholder="Predict crowd density after halftime" />
+          </label>
+          <div class="topbar-actions">
+            <select id="roleSelect" aria-label="Switch dashboard role">
+              <option>Fans</option>
+              <option>Organizers</option>
+              <option>Security</option>
+              <option>Medical</option>
+              <option>Transportation</option>
+              <option>Volunteers</option>
+              <option>Sustainability</option>
+              <option>Operations</option>
+              <option>Analytics</option>
+            </select>
+            <button class="chip" id="contrastToggle">High contrast</button>
+            <button class="chip" id="themeToggle">Dark mode</button>
+            <button class="chip" id="loginOpen">Login</button>
+            <button class="primary-btn compact-auth" id="registerOpen">Register</button>
+            <div class="user-menu hidden" id="userMenu">
+              <span id="userName">Guest</span>
+              <button class="chip" id="logoutButton">Logout</button>
+            </div>
+          </div>
+        </header>
+
+        <section class="hero section" id="overview">
+          <div class="hero-copy">
+            <span class="eyebrow">Enterprise AI Stadium Operating System</span>
+            <h1>StadiumGPT 360</h1>
+            <p>
+              One live control layer for navigation, crowd safety, transport, food, medical response, security,
+              volunteers, sustainability, and fan engagement across FIFA World Cup 2026 venues.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-btn" data-demo="command">Run command simulation</button>
+              <button class="secondary-btn" data-scroll="quickAccess">Quick actions</button>
+              <button class="secondary-btn" data-scroll="liveOps">Live ops</button>
+              <button class="secondary-btn" data-scroll="dashboards">Open dashboards</button>
+            </div>
+          </div>
+          <div class="stadium-visual" aria-label="3D stadium digital twin visualization">
+            <div class="stadium-ring outer"></div>
+            <div class="stadium-ring middle"></div>
+            <div class="stadium-ring pitch"></div>
+            <span class="beacon b1"></span>
+            <span class="beacon b2"></span>
+            <span class="beacon b3"></span>
+            <span class="beacon b4"></span>
+            <div class="live-tile">
+              <strong>Live Twin</strong>
+              <small>72,418 fans - 94% sensor confidence</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="section quick-access" id="quickAccess">
+          <div class="section-heading compact-heading">
+            <span class="eyebrow">Quick Access</span>
+            <h2>Start any stadium workflow in one tap</h2>
+            <p>Use these shortcuts to jump straight into the most common fan, staff, safety, and operations tasks.</p>
+          </div>
+          <div class="quick-grid" id="quickGrid"></div>
+        </section>
+
+        <section class="section kpi-grid" aria-label="Live stadium KPIs" id="kpis"></section>
+
+        <section class="section advanced-ops" id="liveOps">
+          <div class="section-heading">
+            <span class="eyebrow">AI Live Ops</span>
+            <h2>Real-time intelligence, alerts, and automation</h2>
+            <p>Monitor live events, risk levels, and queued AI actions from one operational surface.</p>
+          </div>
+          <div class="ops-layout">
+            <div class="ops-panel">
+              <div class="panel-title">
+                <h3>Live Event Stream</h3>
+                <button class="chip" id="addEventButton">Inject event</button>
+              </div>
+              <div class="event-stream" id="eventStream"></div>
+            </div>
+            <div class="ops-panel">
+              <div class="panel-title">
+                <h3>Risk Board</h3>
+                <button class="chip" id="refreshRiskButton">Refresh risk</button>
+              </div>
+              <div class="risk-board" id="riskBoard"></div>
+            </div>
+            <div class="ops-panel">
+              <div class="panel-title">
+                <h3>Automation Queue</h3>
+                <button class="chip" id="runQueueButton">Run queue</button>
+              </div>
+              <div class="automation-queue" id="automationQueue"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section split" id="navigator">
+          <div>
+            <div class="section-heading">
+              <span class="eyebrow">AI Stadium Navigator</span>
+              <h2>Natural-language indoor routing</h2>
+              <p>Voice, AR, wheelchair, least-crowded, elevator, and fastest-path routing powered by live crowd telemetry.</p>
+            </div>
+            <form class="navigator-form" id="routeForm">
+              <label>
+                From
+                <input id="routeFrom" value="Gate 4" />
+              </label>
+              <label>
+                To
+                <input id="routeTo" value="Seat B-214" />
+              </label>
+              <label>
+                Mode
+                <select id="routeMode">
+                  <option>Fastest route</option>
+                  <option>Least crowded</option>
+                  <option>Wheelchair route</option>
+                  <option>AR guidance</option>
+                </select>
+              </label>
+              <button class="primary-btn" type="submit">Generate route</button>
+            </form>
+            <div class="route-output" id="routeOutput"></div>
+          </div>
+          <div class="map-card">
+            <div class="map-toolbar">
+              <span>Level 2 - live digital twin</span>
+              <button class="chip" id="heatmapToggle">Heatmap on</button>
+            </div>
+            <div class="stadium-map" id="stadiumMap" aria-label="Interactive stadium heatmap"></div>
+          </div>
+        </section>
+
+        <section class="section" id="modules">
+          <div class="section-heading">
+            <span class="eyebrow">Connected AI Modules</span>
+            <h2>Every requested workflow, wired into one demo</h2>
+            <p>Open a module to see live KPIs, automated actions, alert routing, and agent output.</p>
+          </div>
+          <div class="module-grid" id="moduleGrid"></div>
+          <div class="feature-workspace" id="featureWorkspace"></div>
+        </section>
+
+        <section class="section split" id="assistant">
+          <div class="assistant-panel">
+            <div class="section-heading">
+              <span class="eyebrow">Multilingual AI Assistant</span>
+              <h2>Voice, text, translation, and offline guidance</h2>
+            </div>
+            <div class="scenario-row" id="scenarioRow"></div>
+            <div class="chat-window" id="chatWindow"></div>
+            <form class="chat-form" id="chatForm">
+              <select id="languageSelect" aria-label="Assistant language">
+                <option>English</option>
+                <option>Spanish</option>
+                <option>Arabic</option>
+                <option>French</option>
+                <option>Hindi</option>
+                <option>Japanese</option>
+              </select>
+              <input id="chatInput" placeholder="Someone collapsed near Gate 8" />
+              <button class="primary-btn" type="submit">Send</button>
+            </form>
+          </div>
+          <div class="agent-panel">
+            <h3>AI Agent Mesh</h3>
+            <div id="agentTimeline"></div>
+          </div>
+        </section>
+
+        <section class="section" id="dashboards">
+          <div class="section-heading">
+            <span class="eyebrow">Command Center</span>
+            <h2>Role-based operational dashboards</h2>
+            <p>Fans, organizers, security, medical, transportation, volunteers, sustainability, operations, and analytics.</p>
+          </div>
+          <div class="tabs" id="dashboardTabs"></div>
+          <div class="dashboard-layout">
+            <div class="chart-panel" style="position:relative; display:flex; flex-direction:column; gap:12px;">
+              <canvas id="trendCanvas" width="900" height="360" aria-label="Predictive analytics chart"></canvas>
+              <div id="dashboardCustomView" class="hidden" style="border-top:1px solid var(--line); padding-top:12px;"></div>
+            </div>
+            <div class="insight-panel" id="dashboardInsight"></div>
+          </div>
+          <div class="dashboard-actions" id="dashboardActions"></div>
+        </section>
+
+      </main>
+    </div>
+
+    <div class="modal-backdrop hidden" id="authModal" aria-hidden="true">
+      <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <button class="icon-btn auth-close" id="authClose" aria-label="Close login panel">Close</button>
+        <span class="eyebrow">Secure Access</span>
+        <h3 id="authTitle">Login</h3>
+        <div class="auth-tabs">
+          <button class="chip active" data-auth-mode="login">Login</button>
+          <button class="chip" data-auth-mode="register">Register</button>
+        </div>
+        <form class="auth-form" id="authForm">
+          <label id="nameField">
+            Full name
+            <input id="authName" autocomplete="name" placeholder="Alex Morgan" />
+          </label>
+          <label>
+            Email
+            <input id="authEmail" type="email" autocomplete="email" placeholder="operator@stadiumgpt.ai" required />
+          </label>
+          <label>
+            Password
+            <input id="authPassword" type="password" autocomplete="current-password" placeholder="Minimum 6 characters" required />
+          </label>
+          <label>
+            Role
+            <select id="authRole">
+              <option>Fans</option>
+              <option>Organizers</option>
+              <option>Security</option>
+              <option>Medical</option>
+              <option>Transportation</option>
+              <option>Volunteers</option>
+              <option>Sustainability</option>
+              <option>Operations</option>
+              <option>Analytics</option>
+            </select>
+          </label>
+          <button class="primary-btn" id="authSubmit" type="submit">Login</button>
+          <button class="secondary-btn" id="demoLogin" type="button">Continue as demo user</button>
+          <p class="auth-status" id="authStatus"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="command-drawer" id="commandDrawer" aria-live="polite">
+      <div class="drawer-header">
+        <div>
+          <span class="eyebrow">Operations Console</span>
+          <h3>Live Command Simulation</h3>
+        </div>
+        <button class="icon-btn close-drawer" id="closeDrawer" aria-label="Close command drawer">Close</button>
+      </div>
+      <div class="command-controls">
+        <label>
+          Scenario
+          <select id="simulationScenario">
+            <option value="command">Full command center</option>
+            <option value="crowd">Crowd surge</option>
+            <option value="emergency">Medical emergency</option>
+            <option value="transport">Transport egress</option>
+            <option value="security">Security alert</option>
+            <option value="sustainability">Sustainability response</option>
+          </select>
+        </label>
+        <div class="command-buttons">
+          <button class="primary-btn" id="startSimulation" type="button">Start</button>
+          <button class="secondary-btn" id="nextSimulation" type="button">Next step</button>
+          <button class="chip" id="resetSimulation" type="button">Reset</button>
+        </div>
+      </div>
+      <div class="command-summary" id="commandSummary"></div>
+      <div id="simulationLog"></div>
+      <div class="command-actions" id="commandActions"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
