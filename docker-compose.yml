@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stadiumgpt360-advanced:next
+    container_name: stadiumgpt360_next
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      DB_PATH: /app/data/stadiumgpt360.db
+    volumes:
+      - next_data:/app/data
+
+volumes:
+  next_data:
+    driver: local
